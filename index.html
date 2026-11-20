@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>11gal · Demo 展示与讨论页</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="header-top">
+        <span class="brand-badge">11gal / DEMO SHOWCASE</span>
+        <div class="status-group">
+          <span class="status-chip" id="count-chip">当前收录 0 项</span>
+          <span class="status-chip" id="updated-chip">更新于 2026-11-20</span>
+        </div>
+      </div>
+      <h1 id="site-title">11gal · Demo 展示与讨论页</h1>
+      <p class="subtitle" id="site-subtitle">阶段性技术原型、美术视觉与视听试验收录——所有条目均由作者亲自敲定后上架，方便集中体验与讨论。</p>
+    </header>
+
+    <nav id="category-nav" class="filter-bar" aria-label="Demo 分类" hidden></nav>
+
+    <main id="main-content">
+      <div id="load-error" class="notice-banner" role="alert" hidden></div>
+
+      <section id="demo-grid" class="demo-grid" aria-label="已上架 Demo 列表" hidden></section>
+
+      <section id="empty-state" class="empty-stage" aria-labelledby="empty-title">
+        <div class="empty-header">
+          <span class="empty-pill">展厅已就绪 · 待点名上架</span>
+          <h2 id="empty-title">当前暂未上架任何 Demo</h2>
+          <p class="empty-desc">
+            本页面专门用于对外展示和讨论 11gal 阶段性试验成果。所有内容均由作者亲自点名确认后才会整理上传，确保讨论聚焦、不误传未公开工作稿。
+          </p>
+        </div>
+
+        <div class="slot-grid" aria-label="支持的展示形态">
+          <article class="slot-card">
+            <span class="slot-tag">交互原型</span>
+            <h3>WebGL / Live 2.5D 网页</h3>
+            <p>可直接在浏览器里试玩运镜、光影渲染、立绘互动与场景漫游，打开链接即测。</p>
+          </article>
+          <article class="slot-card">
+            <span class="slot-tag">美术视觉</span>
+            <h3>立绘重绘 / 视觉对比</h3>
+            <p>支持高清立绘展示、前后版本对比图板与三渲二着色试验截图审阅。</p>
+          </article>
+          <article class="slot-card">
+            <span class="slot-tag">音频试听</span>
+            <h3>OP / BGM / 语音小样</h3>
+            <p>支持内嵌播放与旋律段落试听，方便针对曲风、配器与人声给出修改意见。</p>
+          </article>
+          <article class="slot-card">
+            <span class="slot-tag">视频片段</span>
+            <h3>PV / 动效短片</h3>
+            <p>支持 MP4 片段在线直播与分镜节奏检视，配合条目讨论要点快速对齐反馈。</p>
+          </article>
+        </div>
+
+        <div class="empty-foot">
+          <span>协作提示：后续每上架一个条目，都会生成专属 <code>#demo=&lt;id&gt;</code> 直达锚点，点开卡片即可查看讨论要点并一键复制分享链接。</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>11gal Showcase · 仅收录经作者确认公开讨论的阶段性 Demo，条目的增删与修改均按作者指令更新。</p>
+    </footer>
+  </div>
+
+  <dialog id="detail-dialog" class="detail-dialog" closedby="any" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <div>
+          <span id="dialog-category" class="card-badge">分类</span>
+          <h2 id="dialog-title">Demo 详情</h2>
+        </div>
+        <button id="dialog-close" type="button" class="icon-close" aria-label="关闭讨论详情">✕</button>
+      </div>
+
+      <div id="dialog-media" class="dialog-media" hidden></div>
+
+      <p id="dialog-summary" class="dialog-summary"></p>
+
+      <section id="dialog-notes-wrap" class="dialog-notes" hidden>
+        <h3>本次重点讨论</h3>
+        <ul id="dialog-notes"></ul>
+      </section>
+
+      <div id="dialog-tags" class="tag-row"></div>
+
+      <div class="dialog-actions">
+        <a id="dialog-open-link" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer" hidden>打开 Demo 页面</a>
+        <button id="dialog-copy-link" type="button" class="btn-secondary">复制讨论直达链接</button>
+        <span id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></span>
+        <form method="dialog" class="dialog-dismiss-form">
+          <button type="submit" class="btn-ghost">关闭</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="./assets/app.js"></script>
+</body>
+</html>
