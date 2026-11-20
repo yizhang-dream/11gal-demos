@@ -4,79 +4,174 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>11gal · Demo 展示与讨论页</title>
-  <link rel="stylesheet" href="./assets/style.css">
+  <script>
+    try {
+      const saved = localStorage.getItem('color-scheme');
+      if (saved === 'light' || saved === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = saved;
+      }
+    } catch {}
+  </script>
+  <title>拾壹 · 试作陈列室 | 11gal Demo Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css?v=20261120-ink">
 </head>
 <body>
+  <!-- Atmospheric Chinese Ink-Wash Backdrop & Ambient Canvas -->
+  <div class="stage-backdrop" aria-hidden="true">
+    <div class="stage-backdrop-art"></div>
+    <div class="stage-backdrop-veil"></div>
+    <div class="stage-paper-grain"></div>
+  </div>
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Galgame Viewport Hairline Frame & Corner Brackets -->
+  <div class="vn-frame" aria-hidden="true">
+    <span class="vn-corner vn-corner-tl"></span>
+    <span class="vn-corner vn-corner-tr"></span>
+    <span class="vn-corner vn-corner-bl"></span>
+    <span class="vn-corner vn-corner-br"></span>
+  </div>
+
   <div class="page-shell">
-    <header class="site-header">
-      <div class="header-top">
-        <span class="brand-badge">11gal / DEMO SHOWCASE</span>
-        <div class="status-group">
-          <span class="status-chip" id="count-chip">当前收录 0 项</span>
-          <span class="status-chip" id="updated-chip">更新于 2026-11-20</span>
+    <!-- Floating Frosted Top Chrome -->
+    <header class="top-bar">
+      <a class="brand-lockup" href="./" aria-label="拾壹 · 试作陈列室首页">
+        <svg class="mini-seal" viewBox="0 0 36 36" aria-hidden="true">
+          <rect x="2" y="2" width="32" height="32" rx="4" fill="currentColor" opacity="0.92"/>
+          <rect x="4.5" y="4.5" width="27" height="27" rx="2.5" fill="none" stroke="rgba(255,248,240,0.68)" stroke-width="0.9"/>
+          <text x="18" y="23.5" text-anchor="middle" fill="#FAF6EE" font-size="13.5" font-weight="700" font-family="'Noto Serif SC', 'Songti SC', serif" letter-spacing="0.5">拾壹</text>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-en">11GAL</span>
+          <span class="brand-sub">PROLOGUE GALLERY</span>
         </div>
+      </a>
+
+      <div class="top-controls">
+        <span class="glass-chip" id="count-chip">收录 0 卷</span>
+        <button id="motion-toggle" type="button" class="glass-pill" aria-label="暂停背景浮墨动画">
+          <span class="pill-dot" aria-hidden="true"></span>
+          <span id="motion-toggle-label">浮墨 · 静</span>
+        </button>
+        <button id="theme-toggle" type="button" class="glass-pill theme-toggle">
+          <span class="theme-option theme-option-to-dark">
+            <svg class="pill-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.2 3.2a6.8 6.8 0 1 0 4.6 11.8 5.8 5.8 0 0 1-4.6-11.8Z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+            </svg>
+            <span>夜 · 墨湖</span>
+            <span class="visually-hidden">切换到深色墨夜主题</span>
+          </span>
+          <span class="theme-option theme-option-to-light">
+            <svg class="pill-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="3.3" stroke="currentColor" stroke-width="1.35"/>
+              <path d="M10 2.6v1.9M10 15.5v1.9M2.6 10h1.9M15.5 10h1.9M4.8 4.8l1.3 1.3M13.9 13.9l1.3 1.3M15.2 4.8l-1.3 1.3M6.1 13.9l-1.3 1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+            <span>昼 · 晴岚</span>
+            <span class="visually-hidden">切换到浅色晴岚主题</span>
+          </span>
+        </button>
       </div>
-      <h1 id="site-title">11gal · Demo 展示与讨论页</h1>
-      <p class="subtitle" id="site-subtitle">阶段性技术原型、美术视觉与视听试验收录——所有条目均由作者亲自敲定后上架，方便集中体验与讨论。</p>
     </header>
 
-    <nav id="category-nav" class="filter-bar" aria-label="Demo 分类" hidden></nav>
+    <main id="main-content" class="stage-main">
+      <div id="load-error" class="notice-banner glass-surface" role="alert" hidden></div>
 
-    <main id="main-content">
-      <div id="load-error" class="notice-banner" role="alert" hidden></div>
+      <!-- Empty Prologue State: Galgame Title + Vertical Ink Calligraphy + Bottom Frosted Dialogue Box -->
+      <section id="empty-state" class="prologue-stage" aria-labelledby="site-title">
+        <div class="title-composition">
+          <div class="title-block">
+            <p class="hero-eyebrow">ELEVEN GALGAME · WORK-IN-PROGRESS GALLERY</p>
+            <h1 id="site-title" class="hero-title">拾壹 · 试作陈列室</h1>
+            <div class="brush-divider" aria-hidden="true">
+              <svg viewBox="0 0 260 18" fill="none">
+                <path d="M2 9.5C44 6.2 92 7.8 119 9C90 10.8 42 11.2 2 9.5Z" fill="currentColor" opacity="0.58"/>
+                <path d="M141 9C172 7.2 216 6.8 258 9.2C218 11.4 174 11.2 141 9Z" fill="currentColor" opacity="0.58"/>
+                <path d="M130 4.2L134.8 9L130 13.8L125.2 9L130 4.2Z" fill="var(--gold)"/>
+              </svg>
+            </div>
+            <p id="site-subtitle" class="hero-subtitle">11gal 阶段性交互原型、立绘视觉与视听片段陈列处。每一卷皆由作者亲自点名落墨，静候共赏与商榷。</p>
+          </div>
 
-      <section id="demo-grid" class="demo-grid" aria-label="已上架 Demo 列表" hidden></section>
-
-      <section id="empty-state" class="empty-stage" aria-labelledby="empty-title">
-        <div class="empty-header">
-          <span class="empty-pill">展厅已就绪 · 待点名上架</span>
-          <h2 id="empty-title">当前暂未上架任何 Demo</h2>
-          <p class="empty-desc">
-            本页面专门用于对外展示和讨论 11gal 阶段性试验成果。所有内容均由作者亲自点名确认后才会整理上传，确保讨论聚焦、不误传未公开工作稿。
-          </p>
+          <aside class="vertical-epigraph" aria-label="序章题签">
+            <p class="epigraph-poem">西湖烟雨<span class="epigraph-dot" aria-hidden="true"></span>墨落成卷</p>
+            <svg class="carved-seal" viewBox="0 0 64 64" role="img" aria-label="拾壹之印">
+              <defs>
+                <filter id="seal-grain">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.18" numOctaves="2" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+              <g filter="url(#seal-grain)">
+                <rect x="4" y="4" width="56" height="56" rx="6" fill="currentColor"/>
+                <rect x="8.5" y="8.5" width="47" height="47" rx="3" fill="none" stroke="rgba(255,248,238,0.55)" stroke-width="1.2"/>
+                <line x1="32" y1="12" x2="32" y2="52" stroke="rgba(255,248,238,0.22)" stroke-width="0.7"/>
+                <line x1="12" y1="32" x2="52" y2="32" stroke="rgba(255,248,238,0.22)" stroke-width="0.7"/>
+                <text x="42.5" y="26.5" text-anchor="middle" fill="#FBF6EC" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'Songti SC', serif">拾</text>
+                <text x="42.5" y="46.5" text-anchor="middle" fill="#FBF6EC" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'Songti SC', serif">壹</text>
+                <text x="21.5" y="26.5" text-anchor="middle" fill="#FBF6EC" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'Songti SC', serif">之</text>
+                <text x="21.5" y="46.5" text-anchor="middle" fill="#FBF6EC" font-size="14.5" font-weight="700" font-family="'Noto Serif SC', 'Songti SC', serif">印</text>
+              </g>
+            </svg>
+          </aside>
         </div>
 
-        <div class="slot-grid" aria-label="支持的展示形态">
-          <article class="slot-card">
-            <span class="slot-tag">交互原型</span>
-            <h3>WebGL / Live 2.5D 网页</h3>
-            <p>可直接在浏览器里试玩运镜、光影渲染、立绘互动与场景漫游，打开链接即测。</p>
-          </article>
-          <article class="slot-card">
-            <span class="slot-tag">美术视觉</span>
-            <h3>立绘重绘 / 视觉对比</h3>
-            <p>支持高清立绘展示、前后版本对比图板与三渲二着色试验截图审阅。</p>
-          </article>
-          <article class="slot-card">
-            <span class="slot-tag">音频试听</span>
-            <h3>OP / BGM / 语音小样</h3>
-            <p>支持内嵌播放与旋律段落试听，方便针对曲风、配器与人声给出修改意见。</p>
-          </article>
-          <article class="slot-card">
-            <span class="slot-tag">视频片段</span>
-            <h3>PV / 动效短片</h3>
-            <p>支持 MP4 片段在线直播与分镜节奏检视，配合条目讨论要点快速对齐反馈。</p>
-          </article>
+        <article class="vn-dialogue-box glass-surface" aria-label="序章陈列说明">
+          <div class="vn-dialogue-header">
+            <div class="vn-nameplate">
+              <span class="nameplate-accent" aria-hidden="true"></span>
+              <span class="nameplate-zh">陈列室 · 序章</span>
+              <span class="nameplate-en">PROLOGUE</span>
+            </div>
+            <span class="glass-meta-chip" id="updated-chip">更新于 2026-11-20</span>
+          </div>
+
+          <div class="vn-dialogue-body">
+            <p class="vn-line">
+              「画卷初展，案头尚留白。交互原型、立绘视觉与视听片段，皆待作者亲点后逐一落墨于此。」<span class="vn-cursor" aria-hidden="true">◆</span>
+            </p>
+          </div>
+
+          <div class="vn-dock-bar">
+            <span class="dock-categories">卷目 · 交互原型 / 美术视觉 / 音频试听 / 影像片段</span>
+            <span class="dock-hint">每卷均附 <code>#demo=&lt;id&gt;</code> 直达锚点</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- Populated CG Gallery State (Shown Automatically When demos.json Has Entries) -->
+      <section id="gallery-stage" class="gallery-stage" aria-labelledby="gallery-title" hidden>
+        <div class="gallery-header glass-surface">
+          <div class="gallery-header-main">
+            <p class="hero-eyebrow">11GAL · EXHIBITION INDEX</p>
+            <h1 id="gallery-title" class="gallery-title">拾壹 · 试作陈列室</h1>
+            <p id="gallery-subtitle" class="gallery-subtitle">11gal 阶段性交互原型、立绘视觉与视听片段陈列处。每一卷皆由作者亲自点名落墨，静候共赏与商榷。</p>
+          </div>
+          <div class="gallery-header-side">
+            <span class="glass-meta-chip" id="gallery-updated-chip">更新于 2026-11-20</span>
+          </div>
         </div>
 
-        <div class="empty-foot">
-          <span>协作提示：后续每上架一个条目，都会生成专属 <code>#demo=&lt;id&gt;</code> 直达锚点，点开卡片即可查看讨论要点并一键复制分享链接。</span>
-        </div>
+        <nav id="category-nav" class="filter-bar" aria-label="Demo 分类" hidden></nav>
+
+        <div id="demo-grid" class="demo-grid" aria-label="已上架 Demo 列表"></div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>11gal Showcase · 仅收录经作者确认公开讨论的阶段性 Demo，条目的增删与修改均按作者指令更新。</p>
+      <p>11gal Showcase · 仅陈列经作者确认公开商榷的阶段性试作</p>
     </footer>
   </div>
 
-  <dialog id="detail-dialog" class="detail-dialog" closedby="any" aria-labelledby="dialog-title">
+  <!-- Frosted Ink-Framed Discussion Scroll Modal -->
+  <dialog id="detail-dialog" class="detail-dialog glass-surface" closedby="any" aria-labelledby="dialog-title">
     <div class="dialog-inner">
       <div class="dialog-head">
         <div>
-          <span id="dialog-category" class="card-badge">分类</span>
-          <h2 id="dialog-title">Demo 详情</h2>
+          <span id="dialog-category" class="seal-tag">分类</span>
+          <h2 id="dialog-title">试作详情</h2>
         </div>
         <button id="dialog-close" type="button" class="icon-close" aria-label="关闭讨论详情">✕</button>
       </div>
@@ -86,23 +181,23 @@
       <p id="dialog-summary" class="dialog-summary"></p>
 
       <section id="dialog-notes-wrap" class="dialog-notes" hidden>
-        <h3>本次重点讨论</h3>
+        <h3>本次商榷要点</h3>
         <ul id="dialog-notes"></ul>
       </section>
 
       <div id="dialog-tags" class="tag-row"></div>
 
       <div class="dialog-actions">
-        <a id="dialog-open-link" class="btn-primary" href="#" target="_blank" rel="noopener noreferrer" hidden>打开 Demo 页面</a>
-        <button id="dialog-copy-link" type="button" class="btn-secondary">复制讨论直达链接</button>
+        <a id="dialog-open-link" class="btn-ink" href="#" target="_blank" rel="noopener noreferrer" hidden>进入试作页</a>
+        <button id="dialog-copy-link" type="button" class="btn-glass">复制讨论直达链接</button>
         <span id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></span>
         <form method="dialog" class="dialog-dismiss-form">
-          <button type="submit" class="btn-ghost">关闭</button>
+          <button type="submit" class="btn-ghost">收卷关闭</button>
         </form>
       </div>
     </div>
   </dialog>
 
-  <script type="module" src="./assets/app.js"></script>
+  <script type="module" src="./assets/app.js?v=20261120-ink"></script>
 </body>
 </html>

@@ -1,98 +1,245 @@
 :root {
-  /* Light palette tokens */
-  --bg-light: #f4f6fb;
-  --bg-accent-light: radial-gradient(circle at 12% 0%, rgba(28, 78, 138, 0.08), transparent 48%),
-    radial-gradient(circle at 90% 10%, rgba(196, 146, 62, 0.09), transparent 42%);
-  --surface-light: #ffffff;
-  --surface-muted-light: #eef2f8;
-  --border-light: #d7dfec;
-  --text-light: #162033;
-  --text-muted-light: #4f5e78;
-  --brand-light: #1c4e8a;
-  --brand-hover-light: #163d6d;
-  --brand-text-light: #ffffff;
-  --gold-light: #9e6b16;
-  --gold-bg-light: rgba(196, 146, 62, 0.12);
-  --cyan-light: #0d737d;
-  --cyan-bg-light: rgba(13, 115, 125, 0.10);
-  --shadow-light: 0 10px 30px rgba(20, 35, 65, 0.07);
+  /* Palette raw tokens: Day (晴岚 · 宣纸淡墨) */
+  --bg-light: #f3eee4;
+  --ink-light: #1a212b;
+  --ink-muted-light: #475364;
+  --seal-light: #b3342c;
+  --seal-bg-light: rgb(179 52 44 / 0.11);
+  --accent-light: #244b66;
+  --accent-hover-light: #19374d;
+  --accent-text-light: #f8f5ef;
+  --gold-light: #966f34;
+  --gold-bg-light: rgb(150 111 52 / 0.13);
+  --glass-top-light: rgb(255 253 248 / 0.64);
+  --glass-bot-light: rgb(245 239 228 / 0.44);
+  --glass-strong-top-light: rgb(254 251 245 / 0.88);
+  --glass-strong-bot-light: rgb(246 240 230 / 0.78);
+  --glass-pill-light: rgb(255 252 246 / 0.56);
+  --glass-border-light: rgb(255 255 255 / 0.80);
+  --glass-hairline-light: rgb(26 36 52 / 0.14);
+  --veil-light: linear-gradient(98deg, rgb(244 239 230 / 0.76) 0%, rgb(244 239 230 / 0.42) 48%, rgb(244 239 230 / 0.12) 100%);
+  --shadow-glass-light:
+    inset 0 1px 0 rgb(255 255 255 / 0.86),
+    inset 0 -1px 0 rgb(26 36 52 / 0.06),
+    0 2px 6px rgb(24 32 46 / 0.05),
+    0 22px 54px rgb(22 30 44 / 0.12);
+  --scrollbar-track-light: #ebe4d7;
+  --scrollbar-thumb-light: #8d939c;
 
-  /* Dark palette tokens */
-  --bg-dark: #0c121e;
-  --bg-accent-dark: radial-gradient(circle at 14% 0%, rgba(92, 225, 230, 0.10), transparent 46%),
-    radial-gradient(circle at 88% 8%, rgba(224, 178, 96, 0.10), transparent 42%);
-  --surface-dark: #131c2e;
-  --surface-muted-dark: #19243a;
-  --border-dark: #273652;
-  --text-dark: #edf2fb;
-  --text-muted-dark: #9eb0cc;
-  --brand-dark: #5ce1e6;
-  --brand-hover-dark: #7ef0f4;
-  --brand-text-dark: #08131d;
-  --gold-dark: #f0c26b;
-  --gold-bg-dark: rgba(240, 194, 107, 0.14);
-  --cyan-dark: #7de9ed;
-  --cyan-bg-dark: rgba(92, 225, 230, 0.13);
-  --shadow-dark: 0 14px 36px rgba(3, 7, 16, 0.45);
+  /* Palette raw tokens: Night (墨夜 · 星湖月影) */
+  --bg-dark: #090f1b;
+  --ink-dark: #eff2f7;
+  --ink-muted-dark: #a6b4c8;
+  --seal-dark: #df5b50;
+  --seal-bg-dark: rgb(223 91 80 / 0.16);
+  --accent-dark: #88d5db;
+  --accent-hover-dark: #abe5ea;
+  --accent-text-dark: #08121c;
+  --gold-dark: #dfc084;
+  --gold-bg-dark: rgb(223 192 132 / 0.15);
+  --glass-top-dark: rgb(17 28 48 / 0.62);
+  --glass-bot-dark: rgb(9 15 28 / 0.44);
+  --glass-strong-top-dark: rgb(16 25 42 / 0.88);
+  --glass-strong-bot-dark: rgb(10 17 30 / 0.80);
+  --glass-pill-dark: rgb(16 26 44 / 0.56);
+  --glass-border-dark: rgb(214 232 252 / 0.18);
+  --glass-hairline-dark: rgb(210 226 248 / 0.15);
+  --veil-dark: linear-gradient(98deg, rgb(9 15 27 / 0.72) 0%, rgb(9 15 27 / 0.40) 48%, rgb(9 15 27 / 0.14) 100%);
+  --shadow-glass-dark:
+    inset 0 1px 0 rgb(235 245 255 / 0.19),
+    inset 0 -1px 0 rgb(0 0 0 / 0.36),
+    0 4px 12px rgb(0 0 0 / 0.25),
+    0 26px 64px rgb(2 5 12 / 0.56);
+  --scrollbar-track-dark: #11192b;
+  --scrollbar-thumb-dark: #546680;
 
-  /* Fallback assignments for browsers without light-dark() */
+  /* Gradient interpolation helper per visual-effects guide */
+  --in-oklab: ;
+
+  /* image-set() light/dark backdrop switch (never use type("")) */
+  --light-type: ;
+  --dark-type: type("image/do-not-use");
+
+  /* Fallback tokens for browsers without light-dark() */
   --bg: var(--bg-light);
-  --bg-accent: var(--bg-accent-light);
-  --surface: var(--surface-light);
-  --surface-muted: var(--surface-muted-light);
-  --border: var(--border-light);
-  --text: var(--text-light);
-  --text-muted: var(--text-muted-light);
-  --brand: var(--brand-light);
-  --brand-hover: var(--brand-hover-light);
-  --brand-text: var(--brand-text-light);
+  --ink: var(--ink-light);
+  --ink-muted: var(--ink-muted-light);
+  --seal: var(--seal-light);
+  --seal-bg: var(--seal-bg-light);
+  --accent: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --accent-text: var(--accent-text-light);
   --gold: var(--gold-light);
   --gold-bg: var(--gold-bg-light);
-  --cyan: var(--cyan-light);
-  --cyan-bg: var(--cyan-bg-light);
-  --shadow: var(--shadow-light);
+  --glass-top: var(--glass-top-light);
+  --glass-bot: var(--glass-bot-light);
+  --glass-strong-top: var(--glass-strong-top-light);
+  --glass-strong-bot: var(--glass-strong-bot-light);
+  --glass-pill: var(--glass-pill-light);
+  --glass-border: var(--glass-border-light);
+  --glass-hairline: var(--glass-hairline-light);
+  --veil: var(--veil-light);
+  --shadow-glass: var(--shadow-glass-light);
+  --scrollbar-track: var(--scrollbar-track-light);
+  --scrollbar-thumb: var(--scrollbar-thumb-light);
 
-  @media (prefers-color-scheme: dark) {
+  /* MANDATORY: Keep base declaration as light dark */
+  color-scheme: light dark;
+  accent-color: var(--accent);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@supports (background: linear-gradient(in oklab, white, black)) {
+  :root {
+    --in-oklab: in oklab;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --light-type: type("image/do-not-use");
+    --dark-type: ;
     --bg: var(--bg-dark);
-    --bg-accent: var(--bg-accent-dark);
-    --surface: var(--surface-dark);
-    --surface-muted: var(--surface-muted-dark);
-    --border: var(--border-dark);
-    --text: var(--text-dark);
-    --text-muted: var(--text-muted-dark);
-    --brand: var(--brand-dark);
-    --brand-hover: var(--brand-hover-dark);
-    --brand-text: var(--brand-text-dark);
+    --ink: var(--ink-dark);
+    --ink-muted: var(--ink-muted-dark);
+    --seal: var(--seal-dark);
+    --seal-bg: var(--seal-bg-dark);
+    --accent: var(--accent-dark);
+    --accent-hover: var(--accent-hover-dark);
+    --accent-text: var(--accent-text-dark);
     --gold: var(--gold-dark);
     --gold-bg: var(--gold-bg-dark);
-    --cyan: var(--cyan-dark);
-    --cyan-bg: var(--cyan-bg-dark);
-    --shadow: var(--shadow-dark);
+    --glass-top: var(--glass-top-dark);
+    --glass-bot: var(--glass-bot-dark);
+    --glass-strong-top: var(--glass-strong-top-dark);
+    --glass-strong-bot: var(--glass-strong-bot-dark);
+    --glass-pill: var(--glass-pill-dark);
+    --glass-border: var(--glass-border-dark);
+    --glass-hairline: var(--glass-hairline-dark);
+    --veil: var(--veil-dark);
+    --shadow-glass: var(--shadow-glass-dark);
+    --scrollbar-track: var(--scrollbar-track-dark);
+    --scrollbar-thumb: var(--scrollbar-thumb-dark);
   }
+}
 
-  @supports (color: light-dark(white, black)) {
+@supports (color: light-dark(white, black)) {
+  :root {
     --bg: light-dark(var(--bg-light), var(--bg-dark));
-    --surface: light-dark(var(--surface-light), var(--surface-dark));
-    --surface-muted: light-dark(var(--surface-muted-light), var(--surface-muted-dark));
-    --border: light-dark(var(--border-light), var(--border-dark));
-    --text: light-dark(var(--text-light), var(--text-dark));
-    --text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
-    --brand: light-dark(var(--brand-light), var(--brand-dark));
-    --brand-hover: light-dark(var(--brand-hover-light), var(--brand-hover-dark));
-    --brand-text: light-dark(var(--brand-text-light), var(--brand-text-dark));
+    --ink: light-dark(var(--ink-light), var(--ink-dark));
+    --ink-muted: light-dark(var(--ink-muted-light), var(--ink-muted-dark));
+    --seal: light-dark(var(--seal-light), var(--seal-dark));
+    --seal-bg: light-dark(var(--seal-bg-light), var(--seal-bg-dark));
+    --accent: light-dark(var(--accent-light), var(--accent-dark));
+    --accent-hover: light-dark(var(--accent-hover-light), var(--accent-hover-dark));
+    --accent-text: light-dark(var(--accent-text-light), var(--accent-text-dark));
     --gold: light-dark(var(--gold-light), var(--gold-dark));
     --gold-bg: light-dark(var(--gold-bg-light), var(--gold-bg-dark));
-    --cyan: light-dark(var(--cyan-light), var(--cyan-dark));
-    --cyan-bg: light-dark(var(--cyan-bg-light), var(--cyan-bg-dark));
+    --glass-top: light-dark(var(--glass-top-light), var(--glass-top-dark));
+    --glass-bot: light-dark(var(--glass-bot-light), var(--glass-bot-dark));
+    --glass-strong-top: light-dark(var(--glass-strong-top-light), var(--glass-strong-top-dark));
+    --glass-strong-bot: light-dark(var(--glass-strong-bot-light), var(--glass-strong-bot-dark));
+    --glass-pill: light-dark(var(--glass-pill-light), var(--glass-pill-dark));
+    --glass-border: light-dark(var(--glass-border-light), var(--glass-border-dark));
+    --glass-hairline: light-dark(var(--glass-hairline-light), var(--glass-hairline-dark));
+    --scrollbar-track: light-dark(var(--scrollbar-track-light), var(--scrollbar-track-dark));
+    --scrollbar-thumb: light-dark(var(--scrollbar-thumb-light), var(--scrollbar-thumb-dark));
   }
+}
 
-  /* MANDATORY: Adapt native browser UI and follow system theme */
-  color-scheme: light dark;
-  accent-color: var(--brand);
+/* Reflect explicit <meta name="color-scheme"> override in CSS */
+:root:has(> head > meta[name="color-scheme"][content="dark"]) {
+  color-scheme: dark;
+  --light-type: type("image/do-not-use");
+  --dark-type: ;
+  --bg: var(--bg-dark);
+  --ink: var(--ink-dark);
+  --ink-muted: var(--ink-muted-dark);
+  --seal: var(--seal-dark);
+  --seal-bg: var(--seal-bg-dark);
+  --accent: var(--accent-dark);
+  --accent-hover: var(--accent-hover-dark);
+  --accent-text: var(--accent-text-dark);
+  --gold: var(--gold-dark);
+  --gold-bg: var(--gold-bg-dark);
+  --glass-top: var(--glass-top-dark);
+  --glass-bot: var(--glass-bot-dark);
+  --glass-strong-top: var(--glass-strong-top-dark);
+  --glass-strong-bot: var(--glass-strong-bot-dark);
+  --glass-pill: var(--glass-pill-dark);
+  --glass-border: var(--glass-border-dark);
+  --glass-hairline: var(--glass-hairline-dark);
+  --veil: var(--veil-dark);
+  --shadow-glass: var(--shadow-glass-dark);
+}
+
+:root:has(> head > meta[name="color-scheme"][content="light"]) {
+  color-scheme: light;
+  --light-type: ;
+  --dark-type: type("image/do-not-use");
+  --bg: var(--bg-light);
+  --ink: var(--ink-light);
+  --ink-muted: var(--ink-muted-light);
+  --seal: var(--seal-light);
+  --seal-bg: var(--seal-bg-light);
+  --accent: var(--accent-light);
+  --accent-hover: var(--accent-hover-light);
+  --accent-text: var(--accent-text-light);
+  --gold: var(--gold-light);
+  --gold-bg: var(--gold-bg-light);
+  --glass-top: var(--glass-top-light);
+  --glass-bot: var(--glass-bot-light);
+  --glass-strong-top: var(--glass-strong-top-light);
+  --glass-strong-bot: var(--glass-strong-bot-light);
+  --glass-pill: var(--glass-pill-light);
+  --glass-border: var(--glass-border-light);
+  --glass-hairline: var(--glass-hairline-light);
+  --veil: var(--veil-light);
+  --shadow-glass: var(--shadow-glass-light);
+}
+
+/* Toggle markup visibility: critical branching across light/dark + overrides */
+.theme-option-to-light {
+  display: none;
+}
+.theme-option-to-dark {
+  display: inline-flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-option-to-dark {
+    display: none;
+  }
+  :root:not(:has(> head > meta[name="color-scheme"][content="light"])) .theme-option-to-light {
+    display: inline-flex;
+  }
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-option-to-dark {
+  display: none;
+}
+:root:has(> head > meta[name="color-scheme"][content="dark"]) .theme-option-to-light {
+  display: inline-flex;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 html, body {
@@ -100,32 +247,430 @@ html, body {
   padding: 0;
   min-height: 100%;
   background-color: var(--bg);
-  background-image: var(--bg-accent);
-  color: var(--text);
-  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "Noto Sans SC", "PingFang SC", Georgia, serif;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ===========================
+   Fixed Ink-Wash Stage Layers
+   =========================== */
+.stage-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+
+.stage-backdrop-art {
+  position: absolute;
+  inset: -1.5%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: image-set(
+    url("./bg-ink-day.webp") var(--light-type),
+    url("./bg-ink-night.webp") var(--dark-type)
+  );
+}
+
+@supports (background-image: light-dark(url("a"), url("b"))) {
+  .stage-backdrop-art {
+    background-image: light-dark(url("./bg-ink-day.webp"), url("./bg-ink-night.webp"));
+  }
+}
+
+.stage-backdrop-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--veil);
+}
+
+.stage-paper-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.042;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+.ambient-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Galgame Viewport Frame */
+.vn-frame {
+  position: fixed;
+  inset: clamp(10px, 1.8vw, 22px);
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  border-radius: 6px;
+}
+
+.vn-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: color-mix(in oklab, var(--gold) 68%, transparent);
+  border-style: solid;
+}
+
+.vn-corner-tl {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+  border-top-left-radius: 4px;
+}
+
+.vn-corner-tr {
+  top: -1px;
+  right: -1px;
+  border-width: 1.5px 1.5px 0 0;
+  border-top-right-radius: 4px;
+}
+
+.vn-corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 1.5px 1.5px;
+  border-bottom-left-radius: 4px;
+}
+
+.vn-corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+  border-bottom-right-radius: 4px;
+}
+
+/* ===========================
+   Shared Optical Frosted Glass
+   =========================== */
+.glass-surface {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(155deg var(--in-oklab), var(--glass-top), var(--glass-bot));
+  -webkit-backdrop-filter: blur(22px) saturate(142%);
+  backdrop-filter: blur(22px) saturate(142%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ===========================
+   Page Shell & Floating Top Bar
+   =========================== */
 .page-shell {
-  width: min(1160px, 100%);
+  position: relative;
+  z-index: 3;
+  width: min(1180px, 100%);
   margin: 0 auto;
-  padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 28px) 36px;
   min-height: 100dvh;
+  padding: clamp(22px, 3.6vw, 42px) clamp(20px, 4vw, 46px) clamp(20px, 3vw, 32px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(18px, 3vh, 28px);
 }
 
-.site-header {
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 18px;
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 6px 14px 6px 8px;
+  border-radius: 999px;
+  background: var(--glass-pill);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  backdrop-filter: blur(16px) saturate(135%);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-border), 0 8px 24px rgb(10 18 32 / 0.08);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.brand-lockup:hover {
+  border-color: color-mix(in oklab, var(--gold) 52%, var(--glass-border));
+}
+
+.mini-seal {
+  width: 28px;
+  height: 28px;
+  color: var(--seal);
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.14));
+}
+
+.brand-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--border);
+  line-height: 1.1;
 }
 
-.header-top {
+.brand-en {
+  font-family: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+}
+
+.brand-sub {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+}
+
+.top-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.glass-chip,
+.glass-pill,
+.glass-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--glass-pill);
+  -webkit-backdrop-filter: blur(16px) saturate(138%);
+  backdrop-filter: blur(16px) saturate(138%);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-border), 0 6px 18px rgb(10 18 32 / 0.06);
+  color: var(--ink-muted);
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.glass-pill {
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 500;
+  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.glass-pill:hover {
+  border-color: color-mix(in oklab, var(--gold) 58%, var(--glass-border));
+}
+
+.glass-pill:focus-visible,
+.btn-ink:focus-visible,
+.btn-glass:focus-visible,
+.btn-ghost:focus-visible,
+.filter-btn:focus-visible,
+.icon-close:focus-visible,
+.brand-lockup:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 6px color-mix(in oklab, var(--gold) 70%, transparent);
+}
+
+.glass-pill[data-paused="true"] .pill-dot {
+  background: var(--ink-muted);
+  box-shadow: none;
+  opacity: 0.65;
+}
+
+.theme-option {
+  align-items: center;
+  gap: 6px;
+}
+
+.pill-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ===========================
+   Prologue Hero & VN Dialogue Box
+   =========================== */
+.stage-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.notice-banner {
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  color: var(--seal);
+  font-size: 14px;
+}
+
+.prologue-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(24px, 4.5vh, 44px);
+  padding-top: clamp(12px, 3.8vh, 40px);
+}
+
+.title-composition {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(20px, 4vw, 48px);
+}
+
+.title-block {
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.hero-eyebrow {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(11.5px, 1.3vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(32px, 5.2vw, 56px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-shadow: 0 2px 24px color-mix(in oklab, var(--bg) 72%, transparent);
+}
+
+.brush-divider {
+  width: min(260px, 72%);
+  color: var(--ink);
+  margin: 2px 0;
+}
+
+.brush-divider svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1px 4px color-mix(in oklab, var(--bg) 60%, transparent));
+}
+
+.hero-subtitle {
+  margin: 0;
+  max-width: 38ch;
+  font-size: clamp(15px, 1.65vw, 17.5px);
+  line-height: 1.85;
+  color: var(--ink-muted);
+}
+
+/* Right-Side Vertical Ink Calligraphy & Carved Seal */
+.vertical-epigraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 14px 18px;
+  border-radius: 14px;
+  background: linear-gradient(170deg var(--in-oklab), var(--glass-top), color-mix(in oklab, var(--glass-bot) 58%, transparent));
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 var(--glass-border), 0 14px 32px rgb(10 18 32 / 0.10);
+  flex-shrink: 0;
+}
+
+.epigraph-poem {
+  margin: 0;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(14px, 1.5vw, 16px);
+  letter-spacing: 0.34em;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.epigraph-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.carved-seal {
+  width: 48px;
+  height: 48px;
+  color: var(--seal);
+  filter: drop-shadow(0 3px 8px color-mix(in oklab, var(--seal) 28%, transparent));
+}
+
+/* Bottom-Anchored Frosted Galgame Dialogue Box */
+.vn-dialogue-box {
+  border-radius: 18px;
+  padding: clamp(20px, 3vw, 30px) clamp(20px, 3.4vw, 34px) clamp(16px, 2.4vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Subtle inner hairline frame inside the Galgame dialogue box */
+.vn-dialogue-box::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--gold) 24%, transparent);
+  pointer-events: none;
+}
+
+.vn-dialogue-header {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -133,47 +678,168 @@ html, body {
   gap: 10px;
 }
 
-.brand-badge {
+.vn-nameplate {
   display: inline-flex;
   align-items: center;
-  padding: 4px 11px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--cyan);
-  background: var(--cyan-bg);
-  border: 1px solid color-mix(in srgb, var(--cyan) 32%, transparent);
+  gap: 10px;
+  padding: 6px 15px 6px 10px;
+  border-radius: 9px;
+  background: linear-gradient(135deg var(--in-oklab), color-mix(in oklab, var(--accent) 14%, var(--glass-top)), var(--glass-bot));
+  border: 1px solid color-mix(in oklab, var(--gold) 38%, var(--glass-border));
+  box-shadow: inset 0 1px 0 var(--glass-border);
 }
 
-.status-group {
+.nameplate-accent {
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--seal), var(--gold));
+}
+
+.nameplate-zh {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+.nameplate-en {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+
+.vn-dialogue-body {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-meta-chip {
+  min-height: 28px;
+  padding: 3px 11px;
+  font-size: 11.5px;
+}
+
+.vn-line {
+  margin: 0;
+  font-size: clamp(15px, 1.55vw, 17.5px);
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+
+.vn-cursor {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--seal);
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .vn-cursor {
+    animation: cursor-breathe 2.2s ease-in-out infinite;
+  }
+
+  .title-block,
+  .vertical-epigraph,
+  .vn-dialogue-box {
+    animation: ink-emerge 0.72s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  .vertical-epigraph {
+    animation-delay: 0.08s;
+  }
+
+  .vn-dialogue-box {
+    animation-delay: 0.14s;
+  }
+}
+
+@keyframes cursor-breathe {
+  0%, 100% {
+    opacity: 0.92;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.34;
+    transform: translateY(2px);
+  }
+}
+
+@keyframes ink-emerge {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vn-dock-bar {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--glass-hairline);
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 12.5px;
+  color: var(--ink-muted);
 }
 
-.status-chip {
+.dock-categories {
+  letter-spacing: 0.06em;
+}
+
+.dock-hint code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 12px;
-  color: var(--text-muted);
-  background: var(--surface-muted);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 3px 11px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: color-mix(in oklab, var(--gold) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 26%, transparent);
+  color: var(--ink);
 }
 
-.site-header h1 {
-  margin: 2px 0 0;
+/* ===========================
+   Populated CG Gallery Stage
+   =========================== */
+.gallery-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gallery-header {
+  border-radius: 16px;
+  padding: clamp(18px, 3vw, 28px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gallery-title {
+  margin: 4px 0 6px;
   font-size: clamp(24px, 3.2vw, 34px);
-  font-weight: 700;
-  letter-spacing: 0.02em;
   line-height: 1.25;
+  letter-spacing: 0.06em;
 }
 
-.subtitle {
+.gallery-subtitle {
   margin: 0;
-  max-width: 72ch;
-  color: var(--text-muted);
-  font-size: clamp(14px, 1.5vw, 15.5px);
+  max-width: 60ch;
+  font-size: 14.5px;
+  color: var(--ink-muted);
 }
 
 .filter-bar {
@@ -184,170 +850,72 @@ html, body {
 
 .filter-btn {
   cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-muted);
+  padding: 7px 16px;
   border-radius: 999px;
-  padding: 7px 15px;
+  background: var(--glass-pill);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid var(--glass-border);
+  color: var(--ink-muted);
   font: inherit;
-  font-size: 13.5px;
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 .filter-btn:hover {
-  border-color: var(--brand);
-  color: var(--text);
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--gold) 55%, var(--glass-border));
 }
 
 .filter-btn[aria-pressed="true"] {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: var(--brand-text);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
   font-weight: 600;
 }
 
-main {
-  flex: 1;
-}
-
-.notice-banner {
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: var(--gold-bg);
-  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
-  color: var(--text);
-  margin-bottom: 18px;
-}
-
-/* Empty Stage */
-.empty-stage {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: clamp(22px, 3.6vw, 38px);
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.empty-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.empty-pill {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gold);
-  background: var(--gold-bg);
-  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
-  border-radius: 999px;
-  padding: 4px 12px;
-}
-
-.empty-header h2 {
-  margin: 0;
-  font-size: clamp(20px, 2.4vw, 26px);
-  font-weight: 700;
-}
-
-.empty-desc {
-  margin: 0;
-  max-width: 68ch;
-  color: var(--text-muted);
-  font-size: 14.5px;
-}
-
-.slot-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
-  gap: 14px;
-}
-
-.slot-card {
-  background: var(--surface-muted);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.slot-tag {
-  align-self: flex-start;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--brand);
-  letter-spacing: 0.04em;
-}
-
-.slot-card h3 {
-  margin: 0;
-  font-size: 15.5px;
-  font-weight: 600;
-}
-
-.slot-card p {
-  margin: 0;
-  font-size: 13.5px;
-  color: var(--text-muted);
-}
-
-.empty-foot {
-  padding-top: 16px;
-  border-top: 1px dashed var(--border);
-  font-size: 13px;
-  color: var(--text-muted);
-  overflow-wrap: anywhere;
-}
-
-.empty-foot code {
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 12.5px;
-  padding: 2px 6px;
-  border-radius: 5px;
-  background: var(--surface-muted);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-
-/* Demo Cards Grid */
 .demo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-  gap: 18px;
+  gap: 20px;
 }
 
 .demo-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  transition: transform 0.16s ease, border-color 0.16s ease;
+  transition: border-color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .demo-card {
+    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
+  }
+  .demo-card:hover {
+    transform: translateY(-3px);
+  }
 }
 
 .demo-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--brand) 55%, var(--border));
+  border-color: color-mix(in oklab, var(--gold) 55%, var(--glass-border));
 }
 
 .card-cover {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 16%, var(--surface-muted)), color-mix(in srgb, var(--gold) 14%, var(--surface-muted)));
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    135deg var(--in-oklab),
+    color-mix(in oklab, var(--accent) 18%, transparent),
+    color-mix(in oklab, var(--gold) 15%, transparent)
+  );
+  border-bottom: 1px solid var(--glass-hairline);
 }
 
 .card-cover img {
@@ -359,14 +927,14 @@ main {
 
 .card-cover-placeholder {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-muted);
 }
 
 .card-body {
-  padding: 18px;
+  position: relative;
+  z-index: 1;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -381,33 +949,37 @@ main {
   gap: 8px;
 }
 
-.card-badge {
+.seal-tag {
   display: inline-block;
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
   font-size: 11.5px;
   font-weight: 600;
-  color: var(--cyan);
-  background: var(--cyan-bg);
-  border-radius: 999px;
-  padding: 2px 10px;
+  letter-spacing: 0.06em;
+  color: var(--seal);
+  background: var(--seal-bg);
+  border: 1px solid color-mix(in oklab, var(--seal) 34%, transparent);
+  border-radius: 6px;
+  padding: 2px 9px;
 }
 
 .card-status {
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
   font-size: 12px;
   color: var(--gold);
-  font-weight: 500;
 }
 
 .card-title {
   margin: 0;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.38;
+  letter-spacing: 0.02em;
 }
 
 .card-summary {
   margin: 0;
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--ink-muted);
   flex: 1;
 }
 
@@ -418,10 +990,11 @@ main {
 }
 
 .tag-chip {
-  font-size: 12px;
-  color: var(--text-muted);
-  background: var(--surface-muted);
-  border: 1px solid var(--border);
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 11.5px;
+  color: var(--ink-muted);
+  background: color-mix(in oklab, var(--ink) 6%, transparent);
+  border: 1px solid var(--glass-hairline);
   border-radius: 6px;
   padding: 2px 8px;
 }
@@ -430,85 +1003,145 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  border-top: 1px solid var(--glass-hairline);
 }
 
-.btn-primary, .btn-secondary, .btn-ghost {
+/* ===========================
+   Action Buttons
+   =========================== */
+.btn-ink,
+.btn-glass,
+.btn-ghost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  padding: 7px 14px;
+  padding: 7px 15px;
   border-radius: 8px;
-  font: inherit;
-  font-size: 13.5px;
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
-.btn-primary {
-  background: var(--brand);
-  color: var(--brand-text);
+.btn-ink {
+  background: var(--accent);
+  color: var(--accent-text);
 }
 
-.btn-primary:hover {
-  background: var(--brand-hover);
+.btn-ink:hover {
+  background: var(--accent-hover);
 }
 
-.btn-secondary {
-  background: var(--surface-muted);
-  border-color: var(--border);
-  color: var(--text);
+.btn-glass {
+  background: var(--glass-pill);
+  border-color: var(--glass-border);
+  color: var(--ink);
 }
 
-.btn-secondary:hover {
-  border-color: var(--brand);
+.btn-glass:hover {
+  border-color: color-mix(in oklab, var(--gold) 55%, var(--glass-border));
 }
 
 .btn-ghost {
   background: transparent;
-  border-color: var(--border);
-  color: var(--text-muted);
+  border-color: var(--glass-hairline);
+  color: var(--ink-muted);
 }
 
 .btn-ghost:hover {
-  color: var(--text);
-  border-color: var(--text-muted);
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink-muted) 60%, transparent);
 }
 
-/* Native Modal Dialog */
+/* ===========================
+   Top-Layer Frosted Dialog
+   =========================== */
 .detail-dialog {
   width: min(760px, calc(100vw - 24px));
   max-height: min(88dvh, 860px);
   padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow);
   margin: auto;
+  border-radius: 18px;
+  background: linear-gradient(155deg var(--in-oklab), var(--glass-strong-top), var(--glass-strong-bot));
+  -webkit-backdrop-filter: blur(26px) saturate(145%);
+  backdrop-filter: blur(26px) saturate(145%);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  box-shadow: var(--shadow-glass);
+
+  /* Closed/exit state & top-layer transition */
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 0.26s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-behavior: allow-discrete;
 }
 
-dialog:modal {
+@media (prefers-reduced-motion: no-preference) {
+  .detail-dialog {
+    transform: scale(0.96) translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-dialog,
+  .detail-dialog::backdrop {
+    transition-duration: 0.1s;
+  }
+}
+
+.detail-dialog:modal {
   /* MANDATORY: Prevent scroll gestures inside modal from chaining to underlying page */
   overscroll-behavior: contain;
 }
 
-dialog::backdrop {
-  /* MANDATORY: Turn backdrop into scroll container so wheel/touch over backdrop does not scroll page */
+.detail-dialog::backdrop {
+  /* MANDATORY: Make backdrop a non-scrollable scroll container to block page scroll */
   overflow: hidden;
   overscroll-behavior: contain;
-  background-color: rgba(10, 16, 28, 0.56);
-  backdrop-filter: blur(4px);
+  background-color: rgb(6 11 22 / 0);
+  backdrop-filter: blur(6px);
+  transition-property: background-color, display, overlay;
+  transition-duration: 0.26s;
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+}
+
+.detail-dialog[open]:where(:not([data-closing])) {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transform: scale(1) translateY(0);
+
+    @starting-style {
+      transform: scale(0.96) translateY(8px);
+    }
+  }
+}
+
+.detail-dialog[open]:where(:not([data-closing]))::backdrop {
+  background-color: rgb(6 11 22 / 0.54);
+
+  @starting-style {
+    background-color: rgb(6 11 22 / 0);
+  }
 }
 
 .dialog-inner {
-  padding: clamp(18px, 3vw, 28px);
+  position: relative;
+  z-index: 1;
+  padding: clamp(20px, 3vw, 30px);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -522,9 +1155,10 @@ dialog::backdrop {
 }
 
 .dialog-head h2 {
-  margin: 6px 0 0;
-  font-size: clamp(19px, 2.4vw, 24px);
+  margin: 8px 0 0;
+  font-size: clamp(20px, 2.4vw, 26px);
   line-height: 1.3;
+  letter-spacing: 0.03em;
 }
 
 .icon-close {
@@ -532,22 +1166,24 @@ dialog::backdrop {
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--surface-muted);
-  color: var(--text);
-  font-size: 16px;
+  border: 1px solid var(--glass-hairline);
+  background: var(--glass-pill);
+  color: var(--ink);
+  font-size: 15px;
   flex-shrink: 0;
+  transition: border-color 0.18s ease, color 0.18s ease;
 }
 
 .icon-close:hover {
-  border-color: var(--brand);
+  border-color: var(--seal);
+  color: var(--seal);
 }
 
 .dialog-media {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface-muted);
+  border: 1px solid var(--glass-hairline);
+  background: color-mix(in oklab, var(--bg) 60%, transparent);
 }
 
 .dialog-media img,
@@ -568,12 +1204,12 @@ dialog::backdrop {
 .dialog-summary {
   margin: 0;
   font-size: 15px;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .dialog-notes {
-  background: var(--surface-muted);
-  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--ink) 5%, transparent);
+  border: 1px solid var(--glass-hairline);
   border-radius: 12px;
   padding: 14px 18px;
 }
@@ -582,6 +1218,7 @@ dialog::backdrop {
   margin: 0 0 8px;
   font-size: 14px;
   color: var(--gold);
+  letter-spacing: 0.06em;
 }
 
 .dialog-notes ul {
@@ -590,7 +1227,7 @@ dialog::backdrop {
   display: grid;
   gap: 6px;
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--ink-muted);
 }
 
 .dialog-actions {
@@ -598,8 +1235,8 @@ dialog::backdrop {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  border-top: 1px solid var(--glass-hairline);
 }
 
 .dialog-dismiss-form {
@@ -607,27 +1244,107 @@ dialog::backdrop {
 }
 
 .copy-feedback {
-  font-size: 13px;
-  color: var(--cyan);
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 12.5px;
+  color: var(--gold);
 }
 
+/* ===========================
+   Footer
+   =========================== */
 .site-footer {
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--text-muted);
+  padding-top: 10px;
+  text-align: center;
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
 }
 
 .site-footer p {
   margin: 0;
 }
 
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+@media (max-width: 760px) {
+  .stage-backdrop-art {
+    background-position: 70% 58%;
+  }
+
+  .stage-backdrop-veil {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--bg) 78%, transparent) 0%,
+      color-mix(in oklab, var(--bg) 56%, transparent) 52%,
+      color-mix(in oklab, var(--bg) 22%, transparent) 100%
+    );
+  }
+
+  .title-composition {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .vertical-epigraph {
+    flex-direction: row-reverse;
+    align-self: flex-start;
+    padding: 9px 14px;
+    gap: 12px;
+  }
+
+  .epigraph-poem {
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.2em;
+    font-size: 13.5px;
+  }
+
+  .carved-seal {
+    width: 34px;
+    height: 34px;
+  }
+}
+
 @media (max-width: 560px) {
+  .vn-frame {
+    inset: 8px;
+  }
+
+  .page-shell {
+    padding: 18px 16px 20px;
+    gap: 16px;
+  }
+
+  .top-bar {
+    gap: 10px;
+  }
+
+  .top-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .dialog-dismiss-form {
     margin-left: 0;
     width: 100%;
   }
+
   .dialog-dismiss-form .btn-ghost {
     width: 100%;
+  }
+}
+
+/* Legacy fallback for scrollbar-color in pre-2025 WebKit */
+@supports not (scrollbar-color: auto) {
+  :root::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  :root::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+  :root::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
   }
 }
