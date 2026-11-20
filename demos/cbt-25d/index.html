@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>云谷 · 会堂回廊</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    background: #233345; color: #fff;
+    font: 14px/1.5 "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+  canvas:active { cursor: grabbing; }
+
+  header, nav, #pad, #status { position: fixed; z-index: 2; }
+  header {
+    top: max(20px, env(safe-area-inset-top));
+    left: clamp(16px, 3vw, 48px);
+    pointer-events: none;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(18, 24, 38, 0.72), 0 2px 14px rgba(14, 22, 36, 0.55);
+  }
+  h1 {
+    margin: 0;
+    font: 500 clamp(19px, 2.1vw, 30px)/1.35 "Songti SC", "SimSun", serif;
+    letter-spacing: 0.14em;
+  }
+  header p { margin: 4px 0 0; font-size: 12px; color: rgba(242, 248, 255, 0.88); }
+  .back-gallery {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: rgba(16, 26, 40, 0.62);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: rgba(242, 248, 255, 0.92);
+    font-size: 12px;
+    text-decoration: none;
+    text-shadow: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .back-gallery:hover, .back-gallery:focus-visible {
+    background: rgba(24, 38, 58, 0.82);
+    border-color: rgba(92, 225, 230, 0.55);
+  }
+
+  nav {
+    bottom: max(18px, env(safe-area-inset-bottom));
+    right: clamp(16px, 3vw, 48px);
+    display: flex;
+    background: rgba(16, 26, 40, 0.74);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(6, 12, 24, 0.35);
+  }
+  button {
+    color: inherit; font: inherit; background: transparent;
+    border: none; cursor: pointer; padding: 8px 13px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  button:hover, button:focus-visible { background: rgba(255, 255, 255, 0.16); }
+  nav button[aria-current="true"] {
+    background: rgba(92, 225, 230, 0.22);
+    color: #9af4f7;
+    font-weight: 600;
+  }
+
+  #status {
+    inset: 0; margin: auto; width: max-content; max-width: 92vw; height: max-content;
+    padding: 10px 18px;
+    background: rgba(16, 26, 40, 0.88);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+  }
+
+  #performance-panel {
+    position: fixed; z-index: 3;
+    top: max(16px, env(safe-area-inset-top));
+    right: clamp(12px, 3vw, 48px);
+    background: rgba(16, 26, 40, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    color: #fff; font-size: 13px;
+    box-shadow: 0 8px 24px rgba(6, 12, 24, 0.35);
+  }
+  #performance-panel summary { cursor: pointer; padding: 7px 14px; touch-action: manipulation; }
+  #performance-controls {
+    border: 0; border-top: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 0; padding: 10px 12px; display: grid; gap: 9px; min-width: 230px;
+  }
+  #performance-controls label {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  #performance-controls select {
+    font: inherit; background: #f4f8ff; color: #1a2736;
+    border: 0; border-radius: 4px; padding: 3px 6px;
+  }
+  #performance-controls input[type="checkbox"] {
+    width: 16px; height: 16px; accent-color: #5ce1e6; cursor: pointer;
+  }
+  .motions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .motions button {
+    padding: 5px 8px; border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 4px; font-size: 12px; touch-action: manipulation;
+  }
+  .motions button[aria-pressed="true"] {
+    background: #f0c97e; border-color: #f0c97e; color: #172536; font-weight: 600;
+  }
+
+  #poke-bubble {
+    position: fixed; left: 50%; top: 15vh; transform: translate(-50%, 8px) scale(0.96);
+    z-index: 4; max-width: min(320px, 84vw); padding: 9px 15px;
+    border-radius: 12px;
+    background: rgba(14, 21, 34, 0.84);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    color: #f4f8ff; font-size: 13px;
+    border: 1px solid rgba(92, 225, 230, 0.45); border-left: 3px solid #5ce1e6;
+    box-shadow: 0 10px 28px rgba(4, 10, 22, 0.42);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  #poke-bubble.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+
+  #pad {
+    display: none; bottom: max(18px, env(safe-area-inset-bottom)); left: 14px;
+    grid-template: repeat(2, 38px) / repeat(3, 38px); gap: 2px; touch-action: none;
+  }
+  #pad button { background: rgba(16, 26, 40, 0.72); border-radius: 5px; touch-action: none; padding: 0; font-size: 19px; }
+  .up { grid-column: 2; }
+  .left { grid-column: 1; }
+
+  body.hide-ui header,
+  body.hide-ui .back-gallery,
+  body.hide-ui nav,
+  body.hide-ui #performance-panel,
+  body.hide-ui #pad,
+  body.hide-ui #poke-bubble {
+    opacity: 0; pointer-events: none;
+  }
+
+  @media (pointer: coarse), (max-width: 650px) {
+    #pad { display: grid; }
+    header { top: 14px; left: 14px; }
+    nav { right: 12px; }
+    nav button { font-size: 12px; padding: 8px 9px; }
+  }
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+</head>
+<body>
+<canvas tabindex="0" aria-label="云谷会堂三维回廊"></canvas>
+<header>
+  <a class="back-gallery" href="../../">← 返回陈列室</a>
+  <h1>云谷 · 会堂回廊</h1>
+  <p id="guide">拖动 360° 环视全景 · WASD / 方向键漫游（已限制安全扇区） · 点击 CBT 互动</p>
+</header>
+
+<details id="performance-panel">
+  <summary>表情 · 氛围 · 动作</summary>
+  <fieldset id="performance-controls" disabled>
+    <label>表情
+      <select id="expression">
+        <option value="neutral">自然</option>
+        <option value="smile">微笑</option>
+        <option value="surprise">惊讶</option>
+        <option value="jito">思索</option>
+        <option value="winkR">眨单眼</option>
+      </select>
+    </label>
+    <label>光影氛围
+      <select id="mood">
+        <option value="day" selected>晴朗午后</option>
+        <option value="golden">17:15 黄金</option>
+      </select>
+    </label>
+    <label>玩家眼高
+      <select id="eye-height">
+        <option value="1.50">1.50 米</option>
+        <option value="1.56" selected>1.56 米</option>
+        <option value="1.65">1.65 米</option>
+      </select>
+    </label>
+    <label>视线跟随
+      <input type="checkbox" id="eye-track" checked>
+    </label>
+    <div class="motions" role="group" aria-label="角色动作">
+      <button data-motion="Idle" aria-pressed="true">待机</button>
+      <button data-motion="Nod">点头</button>
+      <button data-motion="ShakeHead">摇头</button>
+      <button data-motion="Tilt">歪头</button>
+      <button data-motion="Bow">鞠躬</button>
+      <button data-motion="Poke">戳一戳</button>
+    </div>
+  </fieldset>
+</details>
+
+<div id="poke-bubble" role="status" aria-live="polite"></div>
+
+<nav aria-label="视角">
+  <button data-view="start" aria-current="true">回廊全景</button>
+  <button data-view="near">近景互动</button>
+  <button data-view="left">幕墙侧望</button>
+  <button data-view="right">柱廊逆光</button>
+</nav>
+
+<div id="pad" aria-label="行走">
+  <button class="up" data-key="KeyW" aria-label="前进">↑</button>
+  <button class="left" data-key="KeyA" aria-label="左移">←</button>
+  <button class="down" data-key="KeyS" aria-label="后退">↓</button>
+  <button class="right" data-key="KeyD" aria-label="右移">→</button>
+</div>
+
+<p id="status" role="status">正在载入回廊场景与高清 Live 2.5D CBT（约 41 MB，首次加载请稍候）…</p>
+
+<script src="./vendor/Anime2.5DRig/lib/ag-psd.min.js"></script>
+<script src="./vendor/Anime2.5DRig/lib/runtime.js"></script>
+<script src="./vendor/Anime2.5DRig/lib/genericparts.js"></script>
+<script src="./vendor/Anime2.5DRig/lib/rigger.js"></script>
+<script src="./vendor/Anime2.5DRig/lib/renderer.js"></script>
+<script type="module" src="./walk.js?v=20261121"></script>
+</body>
+</html>

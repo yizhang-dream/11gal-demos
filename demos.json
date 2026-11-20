@@ -2,7 +2,33 @@
   "project": {
     "title": "拾壹 · 试作陈列室",
     "subtitle": "11gal 阶段性交互原型、立绘视觉与视听片段陈列处。每一卷皆由作者亲自点名落墨，静候共赏与商榷。",
-    "updatedAt": "2026-11-20"
+    "updatedAt": "2026-11-21"
   },
-  "demos": []
+  "demos": [
+    {
+      "id": "cbt-25d",
+      "title": "云谷回廊 · Live 2.5D CBT（三渲二）",
+      "category": "interactive",
+      "status": "待商榷",
+      "date": "2026-11-21",
+      "summary": "基于 Cel Shader 2.0 与 Live 2.5D 骨骼绑定的立绘重绘试验，支持在限制安全扇区的三维回廊全景中漫游、切换晴昼/黄金光影氛围、触发眼神追踪与互动动作。",
+      "cover": "./demos/cbt-25d/cover.webp",
+      "url": "./demos/cbt-25d/",
+      "media": {
+        "type": "image",
+        "src": "./demos/cbt-25d/cover.webp"
+      },
+      "tags": [
+        "Live 2.5D",
+        "Cel Shader 2.0",
+        "三渲二",
+        "WebGL"
+      ],
+      "notes": [
+        "聚焦对比：HD 立绘重绘结合法线与边缘光后，在晴昼与黄金光影下与回廊实景的融合度。",
+        "体验评估：±34° 安全观察扇区内的全景环视视角与 WASD 漫游手感。",
+        "动作反馈：切换微表情、视线追踪及点击立绘互动时的自然度（后续场景点位与机位将在此基础上进一步深化）。"
+      ]
+    }
+  ]
 }
